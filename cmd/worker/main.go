@@ -2,11 +2,11 @@ package main
 
 import (
 	"context"
-	"log/slog"
 	"time"
 
 	"github.com/barkar96/worker/cmd"
 	"github.com/barkar96/worker/libs/actor"
+	"github.com/barkar96/worker/libs/logging"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 	cfg := map[string]string{}
 
 	if err := run(ctx, cfg); err != nil {
-		slog.Error("TODO")
+		logging.WithFatalError(ctx, err, "application stopped on error")
 	}
 }
 
