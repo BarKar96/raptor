@@ -3,8 +3,10 @@ package main
 import (
 	"context"
 	"log/slog"
+	"time"
 
 	"github.com/barkar96/worker/cmd"
+	"github.com/barkar96/worker/libs/actor"
 )
 
 func main() {
@@ -18,6 +20,8 @@ func main() {
 }
 
 func run(ctx context.Context, sth interface{}) error {
+	g := actor.New()
+	g.Run(ctx, 5*time.Second)
 
 	return nil
 }
