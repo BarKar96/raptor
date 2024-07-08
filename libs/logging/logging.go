@@ -14,11 +14,11 @@ const (
 	errorKey         = "err"
 )
 
-func Init(logLevel slog.Level, environment, application, release, sentryDSN string) {
+func Init(logLevel slog.Level, environment, application string, addSource bool) {
 	h := slog.NewTextHandler(
 		os.Stdout,
 		&slog.HandlerOptions{
-			AddSource: true,
+			AddSource: addSource,
 			Level:     logLevel,
 		})
 	log := slog.New(h)

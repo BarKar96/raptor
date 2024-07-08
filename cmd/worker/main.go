@@ -9,6 +9,7 @@ import (
 	"github.com/barkar96/worker/cmd/worker/config"
 	"github.com/barkar96/worker/libs/actor"
 	"github.com/barkar96/worker/libs/logging"
+	"github.com/barkar96/worker/libs/redis"
 )
 
 func main() {
@@ -22,10 +23,18 @@ func main() {
 	}
 }
 
-func run(ctx context.Context, config *config.Config) error {
+func run(ctx context.Context, cfg *config.Config) error {
 	g := actor.New()
 
-	logging.Info(ctx, "hello world")
+	// === Redis ===
+	_, err := redis.New([]string{"127.0.0.1:5433"}, "", time.Second*5)
+	if err != nil {
+		logging.WithFatalError(ctx, err, "Redis initilization failed")
+	}
+
+	// === PostgreSQL ===
+
+	logging.Info(ctx, cfg.ApplicationName)
 
 	g.Run(ctx, 5*time.Second)
 

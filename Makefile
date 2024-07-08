@@ -1,6 +1,9 @@
 postgres:
 	docker run --name postgres16 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:16-alpine
 
+redis:
+    docker run --name redis16 -p 5433:6379 -d redis
+
 postgres-log:
 	docker exec -it postgres16 psql -U root dev
 
