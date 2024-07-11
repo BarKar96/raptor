@@ -1,4 +1,4 @@
-module github.com/barkar96/worker
+module github.com/barkar96/raptor
 
 go 1.21.9
 

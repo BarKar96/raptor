@@ -2,11 +2,14 @@ package actor
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/barkar96/raptor/libs/logging"
 )
 
 type Actor interface {
@@ -39,7 +42,7 @@ func (g *Group) Run(ctx context.Context, shutDownTimeout time.Duration) error {
 	errors := make(chan error, len(g.actors))
 	for _, a := range g.actors {
 		go func(a Actor) {
-			slog.Info("actor starting")
+			logging.Info(ctx, fmt.Sprintf("%s actor starting", a.Name()))
 			errors <- a.Start(startCtx)
 		}(a)
 	}
@@ -57,8 +60,8 @@ func (g *Group) Run(ctx context.Context, shutDownTimeout time.Duration) error {
 	for i := len(g.actors) - 1; i >= 0; i-- {
 		go func(i int) {
 			a := g.actors[i]
+			logging.Info(ctx, fmt.Sprintf("%s actor stopping", a.Name()))
 			a.Stop(stopCtx)
-			slog.Info("stopped")
 		}(i)
 	}
 

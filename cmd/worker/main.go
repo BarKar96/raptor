@@ -5,11 +5,11 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/barkar96/worker/cmd"
-	"github.com/barkar96/worker/cmd/worker/config"
-	"github.com/barkar96/worker/libs/actor"
-	"github.com/barkar96/worker/libs/logging"
-	"github.com/barkar96/worker/libs/redis"
+	"github.com/barkar96/raptor/cmd"
+	"github.com/barkar96/raptor/cmd/raptor/config"
+	"github.com/barkar96/raptor/libs/actor"
+	"github.com/barkar96/raptor/libs/logging"
+	"github.com/barkar96/raptor/libs/redis"
 )
 
 func main() {
@@ -27,10 +27,11 @@ func run(ctx context.Context, cfg *config.Config) error {
 	g := actor.New()
 
 	// === Redis ===
-	_, err := redis.New([]string{"127.0.0.1:5433"}, "", time.Second*5)
+	rdb, err := redis.New(cfg.RedisAddr, cfg.RedisPassword, cfg.RedisTimeout)
 	if err != nil {
 		logging.WithFatalError(ctx, err, "Redis initilization failed")
 	}
+	g.Add(rdb)
 
 	// === PostgreSQL ===
 

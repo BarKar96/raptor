@@ -3,8 +3,9 @@ package config
 import (
 	"context"
 	"sync"
+	"time"
 
-	"github.com/barkar96/worker/libs/logging"
+	"github.com/barkar96/raptor/libs/logging"
 
 	"github.com/kelseyhightower/envconfig"
 )
@@ -28,4 +29,8 @@ func GetInstance() *Config {
 type Config struct {
 	ApplicationName string `split_words:"true" default:"worker"`
 	EnvironmentName string `split_words:"true" default:"local"`
+
+	RedisAddr     []string      `split_words:"true" default:"127.0.0.1:5433"`
+	RedisPassword string        `split_words:"true" default:""`
+	RedisTimeout  time.Duration `split_words:"true" default:"3s"`
 }
