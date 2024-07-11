@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/barkar96/raptor/libs/logging"
+	"github.com/barkar96/raptor/lib/logging"
 
 	"github.com/kelseyhightower/envconfig"
 )

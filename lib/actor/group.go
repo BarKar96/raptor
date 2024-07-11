@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/barkar96/raptor/libs/logging"
+	"github.com/barkar96/raptor/lib/logging"
 )
 
 type Actor interface {

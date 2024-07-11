@@ -6,8 +6,8 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	"github.com/barkar96/raptor/libs/actor"
-	"github.com/barkar96/raptor/libs/logging"
+	"github.com/barkar96/raptor/lib/actor"
+	"github.com/barkar96/raptor/lib/logging"
 )
 
 var _ actor.Actor = (*Redis)(nil)

@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/barkar96/raptor/cmd"
-	"github.com/barkar96/raptor/cmd/raptor/config"
-	"github.com/barkar96/raptor/libs/actor"
-	"github.com/barkar96/raptor/libs/logging"
-	"github.com/barkar96/raptor/libs/redis"
+	"github.com/barkar96/raptor/cmd/worker/config"
+	"github.com/barkar96/raptor/lib/actor"
+	"github.com/barkar96/raptor/lib/logging"
+	"github.com/barkar96/raptor/lib/redis"
 )
 
 func main() {
