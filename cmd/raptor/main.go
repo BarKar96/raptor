@@ -5,14 +5,14 @@ import (
 	"log/slog"
 	"time"
 
+	"github.com/barkar96/raptor/api/raptor"
 	"github.com/barkar96/raptor/cmd"
 	"github.com/barkar96/raptor/cmd/worker/config"
 	"github.com/barkar96/raptor/lib/actor"
 	"github.com/barkar96/raptor/lib/api"
 	"github.com/barkar96/raptor/lib/logging"
+	"github.com/barkar96/raptor/lib/postgresql"
 	"github.com/barkar96/raptor/lib/redis"
-
-	"github.com/barkar96/raptor/api/raptor"
 )
 
 func main() {
@@ -38,6 +38,12 @@ func run(ctx context.Context, cfg *config.Config) error {
 	g.Add(rdb)
 
 	// === PostgreSQL ===
+	db, err := postgresql.New("root", "secret", "localhost", "5432", "dev")
+	if err != nil {
+		logging.WithFatalError(ctx, err, "PostreSQL initilization failed")
+	}
+	logging.Info(ctx, "PostgreSQL initialized")
+	g.Add(db)
 
 	// === Fiber ===
 	userAPI := raptor.NewUserAPI()

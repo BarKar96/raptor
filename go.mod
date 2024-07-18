@@ -5,6 +5,7 @@ go 1.21.9
 require (
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/kelseyhightower/envconfig v1.4.0
+	github.com/lib/pq v1.10.9
 	github.com/redis/go-redis/v9 v9.5.2
 )
 
